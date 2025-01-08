@@ -1,0 +1,29 @@
+header{
+  background: #8bbd44;
+  padding: 2rem 9%;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0.5rem 1rem rgba(0, 0, 0, .1);
+  height: 108px;
+}
+
+header .logo{
+  display: flex;
+  align-items: center;
+}
+
+header .logo img{
+  height: 75px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+header .titulo{
+  color: white;
+  font-size: 16px;
+  width: 300px;
+}
+
+
+

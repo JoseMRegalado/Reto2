@@ -6,14 +6,24 @@ import { HeaderComponent } from './components/header/header.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
-import {RouterLink, RouterModule, RouterOutlet} from "@angular/router";
+import {RouterLink, RouterModule, RouterOutlet, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {environment} from "../environments/environment";
+import { HomeComponent } from './components/home/home.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+
+const appRoutes: Routes = [
+  {path: 'home', component: HomeComponent},
+  {path: '', component: HomeComponent},
+];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +31,7 @@ import {environment} from "../environments/environment";
     AngularFireAuthModule,
     AngularFirestoreModule,
     RouterOutlet,
-    //RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes),
     RouterLink,
     FormsModule,
   ],
