@@ -1,0 +1,33 @@
+<app-header></app-header>
+<body>
+<app-sidebar></app-sidebar>
+<div>
+<div>
+  <h2>Filtrar por Cargo</h2>
+  <select [(ngModel)]="selectedCargo" (change)="filtrarPostulantes()">
+    <option value="">Seleccione un Cargo</option>
+    <option *ngFor="let cargo of cargos">{{ cargo.CARGO }}</option>
+  </select>
+  <button (click)="evaluarPostulantes()">Evaluar Postulantes</button>
+</div>
+
+<div>
+  <h2>Postulantes</h2>
+  <ul>
+    <li *ngFor="let postulante of postulantesFiltrados">
+      {{ postulante.NOMBRES_Y_APELLIDOS }} - {{ postulante.CARGO_POSTULA }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="postulantesOrdenados.length > 0">
+  <h2>Postulantes Ordenados</h2>
+  <ol>
+    <li *ngFor="let postulante of postulantesOrdenados">
+      {{ postulante.NOMBRES_Y_APELLIDOS }} - Puntaje: {{ postulante.puntaje }}
+    </li>
+  </ol>
+</div>
+</div>
+</body>
+

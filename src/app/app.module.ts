@@ -11,10 +11,12 @@ import {FormsModule} from "@angular/forms";
 import {environment} from "../environments/environment";
 import { HomeComponent } from './components/home/home.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { GeminiComponent } from './components/gemini/gemini.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: '', component: HomeComponent},
+  {path: 'gemini', component: GeminiComponent},
 ];
 
 
@@ -23,7 +25,8 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    SidebarComponent
+    SidebarComponent,
+    GeminiComponent
   ],
   imports: [
     BrowserModule,
