@@ -1,0 +1,17 @@
+.body{
+  display: flex;
+}
+
+.buttons button {
+  margin: 10px; /* Espaciado entre botones */
+  padding: 10px 20px; /* Más espacio interno */
+  border: 1px solid #74c476;
+  background-color: #f8fff0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buttons button:hover {
+  background-color: #e8f5e9; /* Cambia el color en hover */
+}
