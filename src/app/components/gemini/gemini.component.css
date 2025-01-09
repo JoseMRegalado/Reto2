@@ -1,3 +1,49 @@
 body{
   display: flex;
+  gap: 15px;
+}
+
+.button-compare {
+  margin: 10px; /* Espaciado entre botones */
+  padding: 10px 20px; /* Más espacio interno */
+  border: 1px solid #74c476;
+  background-color: #f8fff0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+th {
+  background-color: #f8fff0;
+
+}
+
+.filtrar-Cargo {
+  margin-top:10px;
+}
+
+.postulantes-ordenados{
+  display: flex;
+  gap: 10px;
+}
+
+.postulantes{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
