@@ -33,21 +33,25 @@
         <th>EDUCACIÓN</th>
         <th>HABILIDADES</th>
         <th>TOTAL</th>
-        <th>      </th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let postulante of postulantesFiltrados">
         <td>{{ postulante.NOMBRES_Y_APELLIDOS }}</td>
         <td>{{ postulante.CARGO_POSTULA }}</td>
-        <td>{{ postulante.INFORMACION_ACADEMICA.TITULO}}</td>
-        <td>{{ postulante.CONOCIMIENTOS }}</td>
-        <td>80%</td>
+        <td>{{ postulante.INFORMACION_ACADEMICA[0]?.TITULO }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let curso of postulante.CONOCIMIENTOS">{{ curso.CURSOS }}</li>
+          </ul>
+        </td>
+        <td>{{ postulante.puntaje }}</td>
         <td><button class="btn-see-more">Ver más</button></td>
       </tr>
-
       </tbody>
     </table>
+
   </div>
 </div>
 </body>

@@ -58,28 +58,30 @@ export class GeminiComponent implements OnInit {
       cargoData: this.cargos.find(cargo => cargo.CARGO === this.selectedCargo),
     });
 
-
     this.geminiService.sendPrompt(context).subscribe(
       (response: string) => {
         try {
-          // Limpia el bloque ```json y otros caracteres extra
           const cleanedResponse = response.replace(/```json|```/g, '').trim();
+          const ordenados = JSON.parse(cleanedResponse).postulantesOrdenados || [];
 
-          // Intenta parsear la respuesta como JSON
-          this.postulantesOrdenados = JSON.parse(cleanedResponse).postulantesOrdenados || [];
+          // Actualizar los puntajes en la tabla
+          this.postulantesFiltrados = this.postulantesFiltrados.map(postulante => {
+            const ordenado = ordenados.find((p: { NOMBRES_Y_APELLIDOS: any; }) => p.NOMBRES_Y_APELLIDOS === postulante.NOMBRES_Y_APELLIDOS);
+            return ordenado ? { ...postulante, puntaje: ordenado.puntaje } : postulante;
+          });
+
+          // Ordenar la lista localmente
+          this.postulantesFiltrados.sort((a, b) => b.puntaje - a.puntaje);
+
         } catch (error) {
           console.error('Error al procesar la respuesta del modelo:', error);
-          console.log('Respuesta recibida:', response); // Para depuración
-          // Si no es JSON, almacena la respuesta como texto plano
-          this.postulantesOrdenados = [];
-          this.chatHistory.push({ question: this.message, response });
+          console.log('Respuesta recibida:', response);
         }
       },
       (error: any) => {
         console.error('Error evaluando postulantes:', error);
-        this.postulantesOrdenados = [];
       }
     );
-
   }
+
 }

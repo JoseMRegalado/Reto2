@@ -133,4 +133,9 @@ body {
   border-radius: 10px;
   color: white;
   padding: 10px;
+  cursor: pointer;
+}
+
+.button-compare:hover {
+  background-color: #5fa863;
 }
