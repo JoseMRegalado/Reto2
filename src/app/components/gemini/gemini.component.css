@@ -1,49 +1,143 @@
-body{
+body {
   display: flex;
-  gap: 15px;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-.button-compare {
-  margin: 10px; /* Espaciado entre botones */
-  padding: 10px 20px; /* Más espacio interno */
-  border: 1px solid #74c476;
+.main-container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-section {
   background-color: #f8fff0;
+  padding: 15px;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #f3f3f3;
+  color: #4caf50;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-table {
+.filter-btn.active {
+  background-color: #e0f7e0;
+}
+
+.filter-btn:hover {
+  background-color: #e0f7e0;
+}
+
+.filter-label {
+  font-size: 16px;
+  color: #333;
+  background-color: #f3f3f3;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 5px 10px;
+  background-color: #f9f9f9;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+  flex: 1;
+  background-color: transparent;
+}
+
+.search-box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #aaa;
+}
+
+
+.candidates-section {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.candidates-section h2 {
+  margin-bottom: 15px;
+}
+
+.candidates-table {
   width: 100%;
   border-collapse: collapse;
 }
-th, td {
-  padding: 8px;
+
+.candidates-table th,
+.candidates-table td {
+  padding: 10px;
   text-align: left;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
-th {
+
+.candidates-table th {
   background-color: #f8fff0;
-
 }
 
-.filtrar-Cargo {
-  margin-top:10px;
+.candidates-table tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-.postulantes-ordenados{
-  display: flex;
-  gap: 10px;
+.candidates-table tr:hover {
+  background-color: #eef6e9;
 }
 
-.postulantes{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.btn-see-more {
+  background-color: #74c476;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.todo{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.btn-see-more:hover {
+  background-color: #5fa863;
 }

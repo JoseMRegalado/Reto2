@@ -1,59 +1,51 @@
 <app-header></app-header>
 <body>
 <app-sidebar></app-sidebar>
-<div class="todo">
-<div class="filtrar-Cargo">
-  <h2>Filtrar por Cargo</h2>
-  <select [(ngModel)]="selectedCargo" (change)="filtrarPostulantes()">
-    <option value="">Seleccione un Cargo</option>
-    <option *ngFor="let cargo of cargos">{{ cargo.CARGO }}</option>
-  </select>
-  <button class="button-compare" (click)="evaluarPostulantes()">Evaluar Postulantes</button>
-</div>
-  <div class="postulantes">
-    <div class="titulo">
-      <h2>Postulantes</h2>
+<div class="main-container">
+
+  <div class="filter-section">
+    <div class="filter-group">
+      <button class="filter-btn active">Cargo</button>
+      <select [(ngModel)]="selectedCargo" (change)="filtrarPostulantes()">
+        <option value="">Seleccione un Cargo</option>
+        <option *ngFor="let cargo of cargos">{{ cargo.CARGO }}</option>
+      </select>
     </div>
-    <div class="tabla">
-      <table border="1">
-        <thead>
-        <tr>
-          <th>Nombre y Apellidos</th>
-          <th>Cargo Postula</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let postulante of postulantesFiltrados">
-          <td>{{ postulante.NOMBRES_Y_APELLIDOS }}</td>
-          <td>{{ postulante.CARGO_POSTULA }}</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="filter-group">
+      <button class="button-compare" (click)="evaluarPostulantes()">Evaluar Postulantes</button>
     </div>
   </div>
-<div class="postulantes-ordenados">
-  <div *ngIf="postulantesOrdenados.length > 0">
-    <div class="titulo">
-      <h2>Postulantes Ordenados</h2>
-    </div>
-    <div class="tabla">
-      <table border="1">
-        <thead>
-        <tr>
-          <th>Nombre y Apellidos</th>
-          <th>Puntaje</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let postulante of postulantesOrdenados">
-          <td>{{ postulante.NOMBRES_Y_APELLIDOS }}</td>
-          <td>{{ postulante.puntaje }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar" />
+    <button>
+      <i class="search-icon">🔍</i>
+    </button>
   </div>
-</div>
+
+  <div class="candidates-section">
+    <h2>Lista de Candidatos</h2>
+    <table class="candidates-table">
+      <thead>
+      <tr>
+        <th>Candidato</th>
+        <th>Experiencia</th>
+        <th>Educación</th>
+        <th>Habilidades</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let postulante of postulantesFiltrados">
+        <td>{{ postulante.NOMBRES_Y_APELLIDOS }}</td>
+        <td>{{ postulante.CARGO_POSTULA }}</td>
+        <td>{{ postulante.INFORMACION_ACADEMICA.TITULO}}</td>
+        <td>{{ postulante.CONOCIMIENTOS }}</td>
+        <td><button class="btn-see-more">Ver más</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </body>
-
