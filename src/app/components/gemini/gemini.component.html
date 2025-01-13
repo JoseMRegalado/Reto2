@@ -19,7 +19,7 @@
   <div class="search-box">
     <input type="text" placeholder="Buscar" />
     <button>
-      <i class="search-icon">🔍</i>
+      <img src="assets/img/buscar.svg" alt="Logo buscar">
     </button>
   </div>
 
@@ -28,12 +28,12 @@
     <table class="candidates-table">
       <thead>
       <tr>
-        <th>Candidato</th>
-        <th>Experiencia</th>
-        <th>Educación</th>
-        <th>Habilidades</th>
-        <th>Total</th>
-        <th></th>
+        <th>CANDIDATO</th>
+        <th>EXPERIENCIA</th>
+        <th>EDUCACIÓN</th>
+        <th>HABILIDADES</th>
+        <th>TOTAL</th>
+        <th>      </th>
       </tr>
       </thead>
       <tbody>
@@ -42,8 +42,10 @@
         <td>{{ postulante.CARGO_POSTULA }}</td>
         <td>{{ postulante.INFORMACION_ACADEMICA.TITULO}}</td>
         <td>{{ postulante.CONOCIMIENTOS }}</td>
+        <td>80%</td>
         <td><button class="btn-see-more">Ver más</button></td>
       </tr>
+
       </tbody>
     </table>
   </div>

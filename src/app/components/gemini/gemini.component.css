@@ -12,33 +12,18 @@ body {
   gap: 20px;
 }
 
-.filter-section {
-  background-color: #f8fff0;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 .filter-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-}
-
-.filter-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .filter-btn {
   padding: 10px 15px;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #f3f3f3;
   color: #4caf50;
   font-size: 14px;
@@ -48,12 +33,11 @@ body {
 }
 
 .filter-btn.active {
-  background-color: #e0f7e0;
+  background-color: #f0f0f0;
+  color: #8bbe2e;
+  width: 120px;
 }
 
-.filter-btn:hover {
-  background-color: #e0f7e0;
-}
 
 .filter-label {
   font-size: 16px;
@@ -70,6 +54,7 @@ body {
   border-radius: 20px;
   padding: 5px 10px;
   background-color: #f9f9f9;
+  width: 381px;
 }
 
 .search-box input {
@@ -117,7 +102,8 @@ body {
 }
 
 .candidates-table th {
-  background-color: #f8fff0;
+  background-color: #f9f9fb;
+  color: #666e7d;
 }
 
 .candidates-table tr:nth-child(even) {
@@ -129,15 +115,22 @@ body {
 }
 
 .btn-see-more {
-  background-color: #74c476;
+  background-color: #8bbe2e;
   color: white;
   border: none;
   padding: 8px 12px;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .btn-see-more:hover {
   background-color: #5fa863;
+}
+
+.button-compare{
+  background-color: #8bbe2e;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
 }
