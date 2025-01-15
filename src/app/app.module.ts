@@ -12,11 +12,14 @@ import {environment} from "../environments/environment";
 import { HomeComponent } from './components/home/home.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { GeminiComponent } from './components/gemini/gemini.component';
+import { PdfComponent } from './components/pdf/pdf.component';
+import {HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: '', component: HomeComponent},
   {path: 'gemini', component: GeminiComponent},
+  {path: 'pdf', component: PdfComponent},
 ];
 
 
@@ -26,7 +29,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     HomeComponent,
     SidebarComponent,
-    GeminiComponent
+    GeminiComponent,
+    PdfComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     RouterLink,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

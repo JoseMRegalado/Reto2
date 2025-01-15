@@ -1,0 +1,25 @@
+
+<app-header></app-header>
+<body>
+<app-sidebar></app-sidebar>
+<div>
+  <h2>Subir archivo PDF</h2>
+  <form (submit)="onSubmit()">
+    <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
+    <button type="submit" [disabled]="isLoading || !selectedFile">Subir PDF</button>
+  </form>
+
+  <div *ngIf="isLoading">
+    <p>Cargando archivo... Por favor, espera.</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="responseData">
+    <h3>Datos extraídos del PDF:</h3>
+    <pre>{{ responseData | json }}</pre>
+  </div>
+</div>
+</body>
