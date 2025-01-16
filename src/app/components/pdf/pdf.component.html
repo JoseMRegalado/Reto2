@@ -2,11 +2,15 @@
 <app-header></app-header>
 <body>
 <app-sidebar></app-sidebar>
-<div>
-  <h2>Subir archivo PDF</h2>
-  <form (submit)="onSubmit()">
-    <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
-    <button type="submit" [disabled]="isLoading || !selectedFile">Subir PDF</button>
+<div class="contenedor-upload">
+  <form class="seleccionar" (submit)="onSubmit()">
+    <div class="upload-area">
+      <img src="assets/img/upload.svg" alt="Upload Icon" />
+      <input type="file" id="file-input" (change)="onFileSelected($event)" accept=".pdf"/>
+      <label for="file-input" class="file-label">
+      </label>
+    </div>
+    <button class="subir-pdf" type="submit" [disabled]="isLoading || !selectedFile">Subir PDF</button>
   </form>
 
   <div *ngIf="isLoading">
@@ -17,9 +21,5 @@
     <p>{{ errorMessage }}</p>
   </div>
 
-  <div *ngIf="responseData">
-    <h3>Datos extraídos del PDF:</h3>
-    <pre>{{ responseData | json }}</pre>
-  </div>
 </div>
 </body>

@@ -1,4 +1,47 @@
 body {
   display: flex;
-  gap: 20px;
+
 }
+
+.subir-pdf{
+  background-color: #8bbe2e;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.seleccionar{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+}
+
+.contenedor-upload{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  width: 500px;
+  height: 350px;
+  margin: 50px auto;
+  align-items: center;
+
+}
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
