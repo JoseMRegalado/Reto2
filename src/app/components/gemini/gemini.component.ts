@@ -12,10 +12,7 @@ export class GeminiComponent implements OnInit {
   postulantes: any[] = [];
   postulantesFiltrados: any[] = [];
   selectedCargo: string = '';
-
-  message: string = '';
-  chatHistory: { question: string, response: string }[] = [];
-  postulantesOrdenados: any[] = []; // Lista de postulantes ordenados
+  selectedPostulante: any = null; // Para el popup modal
 
   constructor(
     private firebaseService: FirebaseService,
@@ -29,7 +26,6 @@ export class GeminiComponent implements OnInit {
 
     this.firebaseService.getPostulantes().subscribe((postulantes) => {
       this.postulantes = postulantes;
-      this.postulantesFiltrados = postulantes; // Inicialmente muestra todos.
     });
   }
 
@@ -39,7 +35,7 @@ export class GeminiComponent implements OnInit {
         (postulante) => postulante.CARGO_POSTULA === this.selectedCargo
       );
     } else {
-      this.postulantesFiltrados = this.postulantes; // Si no hay filtro, muestra todos.
+      this.postulantesFiltrados = this.postulantes;
     }
   }
 
@@ -49,13 +45,29 @@ export class GeminiComponent implements OnInit {
       return;
     }
 
+    const cargoSeleccionado = this.cargos.find(cargo => cargo.CARGO === this.selectedCargo);
+    if (!cargoSeleccionado) {
+      console.warn('No se encontraron requisitos para el cargo seleccionado.');
+      return;
+    }
+
     const context = JSON.stringify({
       "contesta en español": true,
       "formato_json": true,
       "evaluarPostulantes": true,
-      "instrucciones": "Devuelve una lista ordenada en formato JSON con el siguiente esquema: { 'postulantesOrdenados': [{ 'NOMBRES_Y_APELLIDOS': string, 'puntaje': number }] }.",
+      "instrucciones": `
+      Evalúa los postulantes según los siguientes criterios:
+      - Nivel académico: compararlo con el nivel requerido del cargo.
+      - Cursos: comparar los cursos con los conocimientos requeridos.
+      Devuelve un puntaje sobre 100 y razones específicas para cada postulante en formato JSON:
+      {
+        'postulantesOrdenados': [
+          { 'NOMBRES_Y_APELLIDOS': string, 'puntaje': number, 'razones': string[] }
+        ]
+      }.
+    `,
       postulantesData: this.postulantesFiltrados,
-      cargoData: this.cargos.find(cargo => cargo.CARGO === this.selectedCargo),
+      cargoData: cargoSeleccionado
     });
 
     this.geminiService.sendPrompt(context).subscribe(
@@ -64,13 +76,11 @@ export class GeminiComponent implements OnInit {
           const cleanedResponse = response.replace(/```json|```/g, '').trim();
           const ordenados = JSON.parse(cleanedResponse).postulantesOrdenados || [];
 
-          // Actualizar los puntajes en la tabla
           this.postulantesFiltrados = this.postulantesFiltrados.map(postulante => {
-            const ordenado = ordenados.find((p: { NOMBRES_Y_APELLIDOS: any; }) => p.NOMBRES_Y_APELLIDOS === postulante.NOMBRES_Y_APELLIDOS);
-            return ordenado ? { ...postulante, puntaje: ordenado.puntaje } : postulante;
+            const ordenado = ordenados.find((p: { NOMBRES_Y_APELLIDOS: string }) => p.NOMBRES_Y_APELLIDOS === postulante.nombre_completo);
+            return ordenado ? { ...postulante, puntaje: ordenado.puntaje, razones: ordenado.razones } : postulante;
           });
 
-          // Ordenar la lista localmente
           this.postulantesFiltrados.sort((a, b) => b.puntaje - a.puntaje);
 
         } catch (error) {
@@ -84,4 +94,11 @@ export class GeminiComponent implements OnInit {
     );
   }
 
+  verMas(postulante: any): void {
+    this.selectedPostulante = postulante;
+  }
+
+  cerrarPopup(): void {
+    this.selectedPostulante = null;
+  }
 }
