@@ -14,6 +14,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { GeminiComponent } from './components/gemini/gemini.component';
 import { PdfComponent } from './components/pdf/pdf.component';
 import {HttpClientModule} from "@angular/common/http";
+import { PerfilIdealComponent } from './components/perfil-ideal/perfil-ideal.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     HomeComponent,
     SidebarComponent,
     GeminiComponent,
-    PdfComponent
+    PdfComponent,
+    PerfilIdealComponent
   ],
   imports: [
     BrowserModule,

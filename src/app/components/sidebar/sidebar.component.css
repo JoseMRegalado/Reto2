@@ -1,12 +1,10 @@
 .sidebar {
-  width: 250px;
   background-color: #f8f8f8;
   height: 86vh;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-right: 1px solid #e5e5e5;
 }
 
 .menu {
@@ -25,9 +23,9 @@
   transition: background-color 0.3s, color 0.3s;
 }
 .menu-item span {
-  font-size: 18px;
+  font-size: 16px;
   margin: 0;
-  color: #7f7f7f;
+  color: #000000;
 }
 
 .menu-item img{
@@ -35,7 +33,7 @@
 }
 .menu-item:hover {
   background-color: #e5f3d7;
-  color: #000;
+  color: #ffffff;
 }
 
 .bottom-menu {
