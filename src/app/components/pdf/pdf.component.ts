@@ -38,6 +38,10 @@ export class PdfComponent implements OnInit {
     }
   }
 
+  clearFile(): void {
+    this.selectedFile = null;
+  }
+
   onSubmit(): void {
     if (!this.selectedFile || !this.selectedCargo) {
       alert('Por favor selecciona un cargo y un archivo antes de enviar.');

@@ -39,13 +39,29 @@ export class GeminiComponent implements OnInit {
     }
   }
 
+  guardarEvaluacionEnHistorial(): void {
+    const evaluacion = {
+      fecha: new Date().toISOString(),  // Guarda la fecha actual
+      cargo: this.selectedCargo,
+      postulantes: this.postulantesFiltrados.map(postulante => ({
+        nombre_completo: postulante.nombre_completo,
+        puntaje: postulante.puntaje,
+        razones: postulante.razones
+      }))
+    };
+
+    this.firebaseService.guardarEvaluacion(evaluacion)
+      .then(() => console.log('Evaluación guardada en historial'))
+      .catch(error => console.error('Error guardando evaluación:', error));
+  }
+
   evaluarPostulantes(): void {
     if (!this.selectedCargo || this.postulantesFiltrados.length === 0) {
       console.warn('Debe seleccionar un cargo y tener postulantes para evaluar.');
       return;
     }
 
-    const cargoSeleccionado = this.cargos.find(cargo => cargo.CARGO === this.selectedCargo);
+    const cargoSeleccionado = this.cargos.find(cargo => cargo.cargo === this.selectedCargo);
     if (!cargoSeleccionado) {
       console.warn('No se encontraron requisitos para el cargo seleccionado.');
       return;
@@ -82,6 +98,7 @@ export class GeminiComponent implements OnInit {
           });
 
           this.postulantesFiltrados.sort((a, b) => b.puntaje - a.puntaje);
+          this.guardarEvaluacionEnHistorial();
 
         } catch (error) {
           console.error('Error al procesar la respuesta del modelo:', error);
@@ -93,6 +110,8 @@ export class GeminiComponent implements OnInit {
       }
     );
   }
+
+
 
   verMas(postulante: any): void {
     this.selectedPostulante = postulante;

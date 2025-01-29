@@ -15,12 +15,16 @@ import { GeminiComponent } from './components/gemini/gemini.component';
 import { PdfComponent } from './components/pdf/pdf.component';
 import {HttpClientModule} from "@angular/common/http";
 import { PerfilIdealComponent } from './components/perfil-ideal/perfil-ideal.component';
+import { HistorialComponent } from './components/historial/historial.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: '', component: HomeComponent},
   {path: 'gemini', component: GeminiComponent},
   {path: 'pdf', component: PdfComponent},
+  {path: 'perfil', component: PerfilIdealComponent},
+  {path: 'historial', component: HistorialComponent},
+
 ];
 
 
@@ -32,7 +36,8 @@ const appRoutes: Routes = [
     SidebarComponent,
     GeminiComponent,
     PdfComponent,
-    PerfilIdealComponent
+    PerfilIdealComponent,
+    HistorialComponent
   ],
   imports: [
     BrowserModule,

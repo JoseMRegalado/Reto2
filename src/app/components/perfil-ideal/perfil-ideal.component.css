@@ -1,0 +1,81 @@
+body {
+  display: flex;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.contenedor-upload {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.seleccionar{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.upload-area{
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.upload-area:hover {
+  border-color: #8bbe2e;
+}
+
+.file-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.file-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.boton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.subir-pdf{
+  background-color: #8bbe2e;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  width: 120px;
+}
+
+.container h3{
+  color: #8bbe2e;
+  font-size: 20px;
+  font-weight: bold;
+}

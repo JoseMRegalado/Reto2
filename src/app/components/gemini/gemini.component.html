@@ -8,7 +8,7 @@
       <button class="filter-btn active">Cargo</button>
       <select [(ngModel)]="selectedCargo" (change)="filtrarPostulantes()">
         <option value="">Seleccione un Cargo</option>
-        <option *ngFor="let cargo of cargos">{{ cargo.CARGO }}</option>
+        <option *ngFor="let cargo of cargos">{{ cargo.cargo}}</option>
       </select>
     </div>
     <div class="filter-group">
