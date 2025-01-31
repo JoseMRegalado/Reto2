@@ -13,6 +13,9 @@ export class PdfComponent implements OnInit {
   cargos: any[] = [];
   isLoading: boolean = false;
   errorMessage: string | null = null;
+  convocatorias: any[] = [];
+  selectedCovocatoria: string = '';
+
 
   constructor(private http: HttpClient, private firebaseService: FirebaseService) {}
 
@@ -25,6 +28,17 @@ export class PdfComponent implements OnInit {
         console.error('Error al cargar los cargos:', error);
       }
     );
+    this.firebaseService.getConvocatorias().subscribe((convocatorias) => {
+      this.convocatorias = convocatorias;
+    });
+  }
+
+  cargarConvocatorias(): void {
+    if (this.selectedCovocatoria == '') {
+      this.firebaseService.getConvocatorias().subscribe(convocatorias => {
+        this.convocatorias = convocatorias;
+      });
+    }
   }
 
   onFileSelected(event: Event): void {
@@ -43,14 +57,15 @@ export class PdfComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.selectedFile || !this.selectedCargo) {
-      alert('Por favor selecciona un cargo y un archivo antes de enviar.');
+    if (!this.selectedFile || !this.selectedCargo || !this.selectedCovocatoria) {
+      alert('Por favor selecciona una convocatoria,un cargo y un archivo antes de enviar.');
       return;
     }
 
     const formData = new FormData();
     formData.append('file', this.selectedFile);
     formData.append('cargo', this.selectedCargo);
+    formData.append('convocatoria', this.selectedCovocatoria);
 
     this.isLoading = true;
     this.errorMessage = null;

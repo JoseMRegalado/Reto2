@@ -11,32 +11,55 @@ export class HistorialComponent implements OnInit {
   historialFiltrado: any[] = [];
   cargos: string[] = []; // Lista de cargos disponibles
   selectedCargo: string = ''; // Cargo seleccionado para filtrar
+  convocatorias: any[] = [];
+  selectedConvocatoria: string = '';
 
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
-    this.cargarHistorial();
-  }
-
-  cargarHistorial(): void {
-    this.firebaseService.obtenerHistorial().subscribe((historial) => {
-      this.historialPostulaciones = historial;
-
-      // Extraer los cargos únicos del historial para el filtro
-      this.cargos = [...new Set(historial.map(entry => entry.cargo))];
-
-      this.filtrarPorCargo(); // Aplicar el filtro al cargar los datos
+    /*this.cargarHistorial();*/
+    this.firebaseService.getConvocatorias().subscribe((convocatorias) => {
+      this.convocatorias = convocatorias;
     });
   }
 
-  filtrarPorCargo(): void {
-    if (!this.selectedCargo) {
-      this.historialFiltrado = []; // No mostrar nada hasta que se seleccione un cargo
+  cargarConvocatorias(): void {
+    if (this.selectedConvocatoria == '') {
+      this.firebaseService.getConvocatorias().subscribe(convocatorias => {
+        this.convocatorias = convocatorias;
+      });
+    }
+  }
+
+  cargarHistorial(): void {
+    if (!this.selectedConvocatoria) {
+      this.historialFiltrado = [];
+      this.cargos = []; // Limpiar cargos cuando no hay convocatoria seleccionada
       return;
     }
 
+    this.firebaseService.obtenerHistorial().subscribe(historial => {
+      // Filtrar por convocatoria
+      this.historialPostulaciones = historial.filter(entry => entry.convocatoria === this.selectedConvocatoria);
+
+      // Extraer cargos únicos para la convocatoria seleccionada
+      this.cargos = [...new Set(this.historialPostulaciones.map(entry => entry.cargo))];
+
+      // Filtrar por cargo seleccionado si ya hay uno
+      this.filtrarHistorial();
+    });
+  }
+
+  filtrarHistorial(): void {
+    if (!this.selectedConvocatoria || !this.selectedCargo) {
+      this.historialFiltrado = [];
+      return;
+    }
+
+    // Filtrar historial por convocatoria y cargo
     this.historialFiltrado = this.historialPostulaciones.filter(entry => entry.cargo === this.selectedCargo);
   }
+
 
   selectedPostulante: any = null; // Para el popup modal
 
@@ -48,6 +71,33 @@ export class HistorialComponent implements OnInit {
   cerrarPopup(): void {
     this.selectedPostulante = null;
   }
+
+  mostrarModalConvocatoria = false;
+  nuevaConvocatoria = { nombre: '', fechaInicio: '', fechaFin: '' };
+
+  abrirModalConvocatoria(): void {
+    this.mostrarModalConvocatoria = true;
+  }
+
+  cerrarModalConvocatoria(): void {
+    this.mostrarModalConvocatoria = false;
+    this.nuevaConvocatoria = { nombre: '', fechaInicio: '', fechaFin: '' }; // Reiniciar valores
+  }
+
+  guardarConvocatoria(): void {
+    if (!this.nuevaConvocatoria.nombre || !this.nuevaConvocatoria.fechaInicio || !this.nuevaConvocatoria.fechaFin) {
+      alert('Por favor, complete todos los campos.');
+      return;
+    }
+
+    this.firebaseService.guardarConvocatoria(this.nuevaConvocatoria).then(() => {
+      alert('Convocatoria guardada con éxito.');
+      this.cerrarModalConvocatoria();
+    }).catch(error => {
+      console.error('Error al guardar la convocatoria:', error);
+    });
+  }
+
 
 
 }

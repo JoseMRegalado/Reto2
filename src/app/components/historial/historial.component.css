@@ -13,6 +13,11 @@ body {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .historial-table {
@@ -25,7 +30,6 @@ body {
 .historial-table td {
   padding: 10px;
   border: 1px solid #ddd;
-  text-align: left;
 }
 
 .historial-table th {
@@ -59,6 +63,8 @@ body {
 
 .filter-group{
   display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
 
 }
 
@@ -91,7 +97,7 @@ body {
   flex-direction: column;
   gap: 15px;
   padding: 20px;
-  width: 90%;
+  width: 100%;
 }
 
 .modal-overlay {
@@ -110,7 +116,7 @@ body {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
+  width: 500px;
   text-align: center;
 }
 
@@ -118,17 +124,84 @@ body {
   text-align: left;
 }
 
-button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  background-color: #007bff;
+.button-compare{
+  background-color: #8bbe2e;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.button-compare:hover {
+  background-color: #5fa863;
+}
+
+.modal-button{
+  display: flex;
+  gap: 15px;
+  justify-content: space-evenly;
+}
+
+.label-modal{
+  padding: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #8bbe2e;
+}
+
+.campos{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.convocatoria{
+  display: flex;
+  justify-content: end;
+  margin-right: 10px;
+}
+
+.opciones{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.modal-content li{
+  line-height: 20px;
+}
+
+.campo-normal{
+  display: flex;
+  align-items: center;
+}
+
+.razones{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+
+.btn-see-more {
+  background-color: #8bbe2e;
   color: white;
   border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
   cursor: pointer;
-  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.btn-see-more:hover {
+  background-color: #5fa863;
+
 }
 
+.ver-mas{
+  text-align: center;
+}

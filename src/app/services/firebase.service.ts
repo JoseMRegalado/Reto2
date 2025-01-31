@@ -17,6 +17,12 @@ export class FirebaseService {
     return this.firestore.collection('postulantes').valueChanges();
   }
 
+  getConvocatorias(): Observable<any[]> {
+    return this.firestore.collection('convocatorias').valueChanges();
+  }
+
+
+
 
   getSubcontenidos(contenidoId: string): Observable<any[]> {
     return this.firestore.collection('subcontenidos', ref => ref.where('contenido', '==', contenidoId)).valueChanges();
@@ -35,12 +41,18 @@ export class FirebaseService {
 
 
   obtenerHistorial(): Observable<any[]> {
-    return this.firestore.collection('historialEvaluaciones', ref => ref.orderBy('fecha', 'desc')).valueChanges();
+    return this.firestore.collection('historialEvaluaciones').valueChanges();
   }
 
   guardarEvaluacion(evaluacion: any): Promise<any> {
     return this.firestore.collection('historialEvaluaciones').add(evaluacion);
   }
+
+  guardarConvocatoria(convocatoria: any): Promise<void> {
+    const id = this.firestore.createId(); // Genera un ID único
+    return this.firestore.collection('convocatorias').doc(id).set(convocatoria);
+  }
+
 
 
 

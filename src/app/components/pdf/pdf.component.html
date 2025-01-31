@@ -4,12 +4,21 @@
 <div class="contenedor">
   <app-header></app-header>
   <div class="container">
-    <div class="filter-group">
-      <button class="filter-btn active">Cargo</button>
-      <select id="cargo-select" [(ngModel)]="selectedCargo" name="cargo" required>
-        <option value="">Seleccione un Cargo</option>
-        <option *ngFor="let cargo of cargos">{{ cargo.cargo }}</option>
-      </select>
+    <div class="opciones">
+      <div class="filter-group">
+        <button class="filter-btn active">Convocatoria</button>
+        <select [(ngModel)]="selectedCovocatoria" (change)="cargarConvocatorias()">
+          <option value="">Seleccione una Convocatoria</option>
+          <option *ngFor="let convocatoria of convocatorias">{{ convocatoria.nombre}}</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <button class="filter-btn active">Cargo</button>
+        <select id="cargo-select" [(ngModel)]="selectedCargo" name="cargo" required>
+          <option value="">Seleccione un Cargo</option>
+          <option *ngFor="let cargo of cargos">{{ cargo.cargo }}</option>
+        </select>
+      </div>
     </div>
 
     <div class="contenedor-upload">
@@ -28,7 +37,7 @@
           <img src="assets/img/borrar.svg" alt="Trash" class="file-icon" (click)="clearFile()" />
         </div>
         <div class="boton">
-          <button class="subir-pdf" type="submit" [disabled]="isLoading || !selectedFile || !selectedCargo">
+          <button class="subir-pdf" type="submit" [disabled]="isLoading || !selectedFile || !selectedCargo || !selectedCovocatoria">
             Subir PDF
           </button>
         </div>

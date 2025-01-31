@@ -13,6 +13,8 @@ export class GeminiComponent implements OnInit {
   postulantesFiltrados: any[] = [];
   selectedCargo: string = '';
   selectedPostulante: any = null; // Para el popup modal
+  convocatorias: any[] = [];
+  selectedConvocatoria: string = '';
 
   constructor(
     private firebaseService: FirebaseService,
@@ -27,22 +29,34 @@ export class GeminiComponent implements OnInit {
     this.firebaseService.getPostulantes().subscribe((postulantes) => {
       this.postulantes = postulantes;
     });
+
+    this.firebaseService.getConvocatorias().subscribe((convocatorias) => {
+      this.convocatorias = convocatorias;
+    });
+
   }
 
-  filtrarPostulantes(): void {
-    if (this.selectedCargo) {
-      this.postulantesFiltrados = this.postulantes.filter(
-        (postulante) => postulante.CARGO_POSTULA === this.selectedCargo
-      );
-    } else {
-      this.postulantesFiltrados = this.postulantes;
+  cargarConvocatorias(): void {
+    if (this.selectedConvocatoria == '') {
+      this.firebaseService.getConvocatorias().subscribe(convocatorias => {
+        this.convocatorias = convocatorias;
+      });
     }
   }
 
+  filtrarPostulantes(): void {
+    this.postulantesFiltrados = this.postulantes.filter(postulante => {
+      const cargoCoincide = this.selectedCargo ? postulante.CARGO_POSTULA === this.selectedCargo : true;
+      const convocatoriaCoincide = this.selectedConvocatoria ? postulante.CONVOCATORIA === this.selectedConvocatoria : true;
+      return cargoCoincide && convocatoriaCoincide;
+    });
+  }
+
+
   guardarEvaluacionEnHistorial(): void {
     const evaluacion = {
-      fecha: new Date().toLocaleDateString('es-ES'),  // Formato "DD/MM/AAAA"
       cargo: this.selectedCargo,
+      convocatoria:this.selectedConvocatoria,
       postulantes: this.postulantesFiltrados.map(postulante => ({
         nombre_completo: postulante.nombre_completo,
         puntaje: postulante.puntaje,
@@ -56,7 +70,7 @@ export class GeminiComponent implements OnInit {
   }
 
   evaluarPostulantes(): void {
-    if (!this.selectedCargo || this.postulantesFiltrados.length === 0) {
+    if (!this.selectedCargo || !this.convocatorias || this.postulantesFiltrados.length === 0) {
       console.warn('Debe seleccionar un cargo y tener postulantes para evaluar.');
       return;
     }

@@ -6,10 +6,17 @@
 
     <div class="filter-section">
       <div class="filter-group">
+        <button class="filter-btn active">Convocatoria</button>
+        <select [(ngModel)]="selectedConvocatoria" (change)="filtrarPostulantes()">
+          <option value="">Seleccione una Convocatoria</option>
+          <option *ngFor="let convocatoria of convocatorias" [value]="convocatoria.nombre">{{ convocatoria.nombre}}</option>
+        </select>
+      </div>
+      <div class="filter-group">
         <button class="filter-btn active">Cargo</button>
         <select [(ngModel)]="selectedCargo" (change)="filtrarPostulantes()">
           <option value="">Seleccione un Cargo</option>
-          <option *ngFor="let cargo of cargos">{{ cargo.cargo}}</option>
+          <option *ngFor="let cargo of cargos" [value]="cargo.cargo">{{ cargo.cargo}}</option>
         </select>
       </div>
       <div class="filter-group">
@@ -66,24 +73,40 @@
       <div class="modal-content">
         <h3>Detalles de Evaluación</h3>
         <div class="text">
-          <p><strong>Nombre:</strong> {{ selectedPostulante.nombre_completo }}</p>
-          <p><strong>Cargo Postulado:</strong> {{ selectedPostulante.CARGO_POSTULA }}</p>
-          <p><strong>Puntaje:</strong> {{ selectedPostulante.puntaje }}</p>
-          <p><strong>Razones (Aspectos Positivos):</strong></p>
-          <ul>
-            <li *ngFor="let razon of selectedPostulante.razones.aspectosPositivos">
-              {{ razon }}
-            </li>
-          </ul>
-          <p><strong>Razones (Aspectos Negativos):</strong></p>
-          <ul>
-            <li *ngFor="let razon of selectedPostulante.razones.aspectosNegativos">
-              {{ razon }}
-            </li>
-          </ul>
+          <div class="campo-normal">
+            <label class="label-modal">Nombre:</label>
+            <p>{{ selectedPostulante.nombre_completo }}</p>
+          </div>
+          <div class="campo-normal">
+            <label class="label-modal">Cargo Postulado:</label>
+            <p> {{ selectedCargo }}</p>
+          </div>
+          <div class="campo-normal">
+            <label class="label-modal">Puntaje:</label>
+            <p> {{ selectedPostulante.puntaje }}</p>
+          </div>
+          <div class="razones">
+            <label class="label-modal">Razones (Aspectos Positivos):</label>
+            <ul>
+              <li *ngFor="let razon of selectedPostulante.razones.aspectosPositivos">
+                {{ razon }}
+              </li>
+            </ul>
+          </div>
+          <div class="razones">
+            <label class="label-modal">Razones (Aspectos Negativos):</label>
+            <ul>
+              <li *ngFor="let razon of selectedPostulante.razones.aspectosNegativos">
+                {{ razon }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-button">
+          <button class="button-compare" (click)="cerrarPopup()">Cerrar</button>
         </div>
 
-        <button (click)="cerrarPopup()">Cerrar</button>
+
       </div>
     </div>
 
