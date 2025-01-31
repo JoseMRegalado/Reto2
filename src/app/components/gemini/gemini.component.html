@@ -1,85 +1,94 @@
-<app-header></app-header>
 <body>
 <app-sidebar></app-sidebar>
-<div class="main-container">
+<div class="contenedor">
+  <app-header></app-header>
+  <div class="main-container">
 
-  <div class="filter-section">
-    <div class="filter-group">
-      <button class="filter-btn active">Cargo</button>
-      <select [(ngModel)]="selectedCargo" (change)="filtrarPostulantes()">
-        <option value="">Seleccione un Cargo</option>
-        <option *ngFor="let cargo of cargos">{{ cargo.cargo}}</option>
-      </select>
-    </div>
-    <div class="filter-group">
-      <button class="button-compare" (click)="evaluarPostulantes()">Evaluar Postulantes</button>
-    </div>
-  </div>
-
-  <div class="search-box">
-    <input type="text" placeholder="Buscar" />
-    <button>
-      <img src="assets/img/buscar.svg" alt="Logo buscar">
-    </button>
-  </div>
-
-  <div class="candidates-section">
-    <h2>Lista de Candidatos</h2>
-    <table class="candidates-table">
-      <thead>
-      <tr>
-        <th>CANDIDATO</th>
-        <th>EXPERIENCIA</th>
-        <th>EDUCACIÓN</th>
-        <th>CURSOS</th>
-        <th>TOTAL</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let postulante of postulantesFiltrados"  [ngClass]="{'top-postulante': postulante.puntaje === postulantesFiltrados[0]?.puntaje}">
-        <td>{{ postulante.nombre_completo }}</td>
-        <td>{{ postulante.CARGO_POSTULA }}</td>
-        <td>{{ postulante.nivel_academico }}</td>
-        <td>
-          <ul>
-            <!-- Mostrar los cursos disponibles -->
-            <li *ngIf="postulante.curso1">{{ postulante.curso1 }}</li>
-            <li *ngIf="postulante.curso2">{{ postulante.curso2 }}</li>
-            <li *ngIf="postulante.curso3">{{ postulante.curso3 }}</li>
-          </ul>
-        </td>
-        <td>{{ postulante.puntaje }}</td>
-        <td><button class="btn-see-more" (click)="verMas(postulante)">Ver más</button></td>
-      </tr>
-      </tbody>
-    </table>
-
-  </div>
-  <div *ngIf="!postulantesFiltrados.length && selectedCargo" class="loading">
-    Procesando información...
-  </div>
-
-  <!-- Popup Modal -->
-  <div *ngIf="selectedPostulante" class="modal-overlay">
-    <div class="modal-content">
-      <h3>Detalles de Evaluación</h3>
-      <div class="text">
-        <p><strong>Nombre:</strong> {{ selectedPostulante.nombre_completo }}</p>
-        <p><strong>Cargo Postulado:</strong> {{ selectedPostulante.CARGO_POSTULA }}</p>
-        <p><strong>Puntaje:</strong> {{ selectedPostulante.puntaje }}</p>
-        <p><strong>Razones:</strong></p>
-        <ul>
-          <li *ngFor="let razon of selectedPostulante.razones">
-            {{ razon }}
-          </li>
-        </ul>
+    <div class="filter-section">
+      <div class="filter-group">
+        <button class="filter-btn active">Cargo</button>
+        <select [(ngModel)]="selectedCargo" (change)="filtrarPostulantes()">
+          <option value="">Seleccione un Cargo</option>
+          <option *ngFor="let cargo of cargos">{{ cargo.cargo}}</option>
+        </select>
       </div>
-
-      <button (click)="cerrarPopup()">Cerrar</button>
+      <div class="filter-group">
+        <button class="button-compare" (click)="evaluarPostulantes()">Evaluar Postulantes</button>
+      </div>
     </div>
-  </div>
 
+    <div class="search-box">
+      <input type="text" placeholder="Buscar" />
+      <button>
+        <img src="assets/img/buscar.svg" alt="Logo buscar">
+      </button>
+    </div>
+
+    <div class="candidates-section">
+      <h2>Lista de Candidatos</h2>
+      <table class="candidates-table">
+        <thead>
+        <tr>
+          <th>CANDIDATO</th>
+          <th>EXPERIENCIA</th>
+          <th>EDUCACIÓN</th>
+          <th>CURSOS</th>
+          <th>TOTAL</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let postulante of postulantesFiltrados"  [ngClass]="{'top-postulante': postulante.puntaje === postulantesFiltrados[0]?.puntaje}">
+          <td>{{ postulante.nombre_completo }}</td>
+          <td>{{ postulante.CARGO_POSTULA }}</td>
+          <td>{{ postulante.nivel_academico }}</td>
+          <td>
+            <ul>
+              <!-- Mostrar los cursos disponibles -->
+              <li *ngIf="postulante.curso1">{{ postulante.curso1 }}</li>
+              <li *ngIf="postulante.curso2">{{ postulante.curso2 }}</li>
+              <li *ngIf="postulante.curso3">{{ postulante.curso3 }}</li>
+            </ul>
+          </td>
+          <td>{{ postulante.puntaje }}</td>
+          <td><button class="btn-see-more" (click)="verMas(postulante)">Ver más</button></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div *ngIf="!postulantesFiltrados.length && selectedCargo" class="loading">
+      Procesando información...
+    </div>
+
+    <!-- Popup Modal -->
+    <div *ngIf="selectedPostulante" class="modal-overlay">
+      <div class="modal-content">
+        <h3>Detalles de Evaluación</h3>
+        <div class="text">
+          <p><strong>Nombre:</strong> {{ selectedPostulante.nombre_completo }}</p>
+          <p><strong>Cargo Postulado:</strong> {{ selectedPostulante.CARGO_POSTULA }}</p>
+          <p><strong>Puntaje:</strong> {{ selectedPostulante.puntaje }}</p>
+          <p><strong>Razones (Aspectos Positivos):</strong></p>
+          <ul>
+            <li *ngFor="let razon of selectedPostulante.razones.aspectosPositivos">
+              {{ razon }}
+            </li>
+          </ul>
+          <p><strong>Razones (Aspectos Negativos):</strong></p>
+          <ul>
+            <li *ngFor="let razon of selectedPostulante.razones.aspectosNegativos">
+              {{ razon }}
+            </li>
+          </ul>
+        </div>
+
+        <button (click)="cerrarPopup()">Cerrar</button>
+      </div>
+    </div>
+
+
+  </div>
 
 </div>
 </body>

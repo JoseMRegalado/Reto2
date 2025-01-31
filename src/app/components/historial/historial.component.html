@@ -1,35 +1,77 @@
-<app-header></app-header>
-
 <body>
 <app-sidebar></app-sidebar>
-<div class="historial-container">
-  <h2>Historial de Evaluaciones</h2>
+<div class="contenedor">
+  <app-header></app-header>
+  <div class="contenedor-general">
+    <div class="contenedor-evaluacion">
+      <h2>Historial de Evaluaciones</h2>
+      <div class="filter-group">
+        <button class="filter-btn active">Cargo</button>
+        <select id="cargo-select" [(ngModel)]="selectedCargo" (change)="filtrarPorCargo()" required>
+          <option value="">Seleccione un Cargo</option>
+          <option *ngFor="let cargo of cargos" [value]="cargo">{{ cargo }}</option>
+        </select>
+      </div>
+    </div>
 
-  <table class="historial-table">
-    <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Cargo</th>
-      <th>Postulante</th>
-      <th>Puntaje</th>
-      <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let entry of historialPostulaciones">
-      <td>{{ entry.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
-      <td>{{ entry.cargo }}</td>
-      <td>{{ entry.nombre_completo }}</td>
-      <td>{{ entry.puntaje }}</td>
-      <td>
-        <button class="btn-detalles" (click)="verDetalles(entry)">Ver Detalles</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="historial-container">
+      <table class="historial-table">
+        <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Postulante</th>
+          <th>Puntaje</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let entry of historialFiltrado">
+          <tr *ngFor="let postulante of entry.postulantes">
+            <td>{{ entry.fecha }}</td> <!-- Se muestra la fecha en cada fila -->
+            <td>{{ postulante.nombre_completo }}</td>
+            <td>{{ postulante.puntaje }}</td>
+            <td>
+              <button (click)="verDetalles(postulante)">Ver Detalles</button>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
 
-  <p *ngIf="historialPostulaciones.length === 0" class="no-data">
-    No hay evaluaciones guardadas aún.
-  </p>
+      </table>
+
+      <p *ngIf="historialPostulaciones.length === 0" class="no-data">
+        No hay evaluaciones guardadas aún.
+      </p>
+    </div>
+
+    <!-- Popup Modal -->
+    <div *ngIf="selectedPostulante" class="modal-overlay">
+      <div class="modal-content">
+        <h3>Detalles de Evaluación</h3>
+        <div class="text">
+          <p><strong>Nombre:</strong> {{ selectedPostulante.nombre_completo }}</p>
+          <p><strong>Cargo Postulado:</strong> {{ selectedCargo }}</p>
+          <p><strong>Puntaje:</strong> {{ selectedPostulante.puntaje }}</p>
+          <p><strong>Razones (Aspectos Positivos):</strong></p>
+          <ul>
+            <li *ngFor="let razon of selectedPostulante.razones.aspectosPositivos">
+              {{ razon }}
+            </li>
+          </ul>
+          <p><strong>Razones (Aspectos Negativos):</strong></p>
+          <ul>
+            <li *ngFor="let razon of selectedPostulante.razones.aspectosNegativos">
+              {{ razon }}
+            </li>
+          </ul>
+        </div>
+
+        <button (click)="cerrarPopup()">Cerrar</button>
+      </div>
+    </div>
+
+
+  </div>
+
 </div>
 </body>

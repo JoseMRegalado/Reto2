@@ -4,6 +4,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.contenedor{
+  width: 100%;
+}
+
 .contenedor-upload {
   align-items: center;
   justify-content: center;
@@ -104,7 +108,7 @@ body {
   width: 120px;
 }
 
-.contenedor{
+.container{
   width: 100%;
   padding: 20px;
   display: flex;

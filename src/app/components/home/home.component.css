@@ -1,12 +1,16 @@
 body {
   display: flex;
-  gap: 20px;
+}
+
+.contenedor{
+  width: 100%;
 }
 
 .buttons {
   display: flex;
   gap: 20px;
   margin-top: 10px;
+  margin-left: 15px;
 }
 
 .boton {

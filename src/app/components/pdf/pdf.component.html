@@ -1,44 +1,47 @@
-<app-header></app-header>
+
 <body>
 <app-sidebar></app-sidebar>
 <div class="contenedor">
-  <div class="filter-group">
-    <button class="filter-btn active">Cargo</button>
-    <select id="cargo-select" [(ngModel)]="selectedCargo" name="cargo" required>
-      <option value="">Seleccione un Cargo</option>
-      <option *ngFor="let cargo of cargos">{{ cargo.cargo }}</option>
-    </select>
-  </div>
-
-<div class="contenedor-upload">
-  <form class="seleccionar" (submit)="onSubmit()">
-    <div class="upload-area">
-      <label for="file-input" class="custom-file-label">
-        <img src="assets/img/upload.svg" alt="Upload Icon" class="upload-icon" />
-        <p>Selecciona tus archivos</p>
-      </label>
-      <input type="file" id="file-input" (change)="onFileSelected($event)" accept=".pdf" hidden />
+  <app-header></app-header>
+  <div class="container">
+    <div class="filter-group">
+      <button class="filter-btn active">Cargo</button>
+      <select id="cargo-select" [(ngModel)]="selectedCargo" name="cargo" required>
+        <option value="">Seleccione un Cargo</option>
+        <option *ngFor="let cargo of cargos">{{ cargo.cargo }}</option>
+      </select>
     </div>
 
-    <div *ngIf="selectedFile" class="file-preview">
-      <img src="assets/img/pdf.svg" alt="PDF Icon" class="file-icon" />
-      <p>{{ selectedFile.name }}</p>
-      <img src="assets/img/borrar.svg" alt="Trash" class="file-icon" (click)="clearFile()" />
-    </div>
-    <div class="boton">
-      <button class="subir-pdf" type="submit" [disabled]="isLoading || !selectedFile || !selectedCargo">
-        Subir PDF
-      </button>
-    </div>
-  </form>
+    <div class="contenedor-upload">
+      <form class="seleccionar" (submit)="onSubmit()">
+        <div class="upload-area">
+          <label for="file-input" class="custom-file-label">
+            <img src="assets/img/upload.svg" alt="Upload Icon" class="upload-icon" />
+            <p>Selecciona tus archivos</p>
+          </label>
+          <input type="file" id="file-input" (change)="onFileSelected($event)" accept=".pdf" hidden />
+        </div>
 
-  <div *ngIf="isLoading">
-    <p>Cargando archivo... Por favor, espera.</p>
-  </div>
+        <div *ngIf="selectedFile" class="file-preview">
+          <img src="assets/img/pdf.svg" alt="PDF Icon" class="file-icon" />
+          <p>{{ selectedFile.name }}</p>
+          <img src="assets/img/borrar.svg" alt="Trash" class="file-icon" (click)="clearFile()" />
+        </div>
+        <div class="boton">
+          <button class="subir-pdf" type="submit" [disabled]="isLoading || !selectedFile || !selectedCargo">
+            Subir PDF
+          </button>
+        </div>
+      </form>
 
-  <div *ngIf="errorMessage" class="error">
-    <p>{{ errorMessage }}</p>
+      <div *ngIf="isLoading">
+        <p>Cargando archivo... Por favor, espera.</p>
+      </div>
+
+      <div *ngIf="errorMessage" class="error">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
   </div>
-</div>
 </div>
 </body>

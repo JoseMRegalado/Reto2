@@ -1,40 +1,41 @@
-<app-header></app-header>
 <body>
 <app-sidebar></app-sidebar>
-<div class="container">
-  <h3>Definir Perfil Ideal</h3>
-  <h5>Carga tus archivos</h5>
-  <div class="contenedor-upload">
-    <form class="seleccionar" (submit)="onSubmit()">
-      <div class="upload-area">
-        <label for="file-input" class="custom-file-label">
-          <img src="assets/img/upload.svg" alt="Upload Icon" class="upload-icon" />
-          <p>Selecciona tus archivos</p>
-        </label>
-        <input type="file" id="file-input" (change)="onFileSelected($event)" accept=".pdf" hidden />
+<div class="contenedor">
+  <app-header></app-header>
+  <div class="container">
+    <h3>Definir Perfil Ideal</h3>
+    <h5>Carga tus archivos</h5>
+    <div class="contenedor-upload">
+      <form class="seleccionar" (submit)="onSubmit()">
+        <div class="upload-area">
+          <label for="file-input" class="custom-file-label">
+            <img src="assets/img/upload.svg" alt="Upload Icon" class="upload-icon" />
+            <p>Selecciona tus archivos</p>
+          </label>
+          <input type="file" id="file-input" (change)="onFileSelected($event)" accept=".pdf" hidden />
+        </div>
+
+        <div *ngIf="selectedFile" class="file-preview">
+          <img src="assets/img/pdf.svg" alt="PDF Icon" class="file-icon" />
+          <p>{{ selectedFile.name }}</p>
+          <img src="assets/img/borrar.svg" alt="Trash" class="file-icon" (click)="clearFile()" />
+        </div>
+        <div class="boton">
+          <button class="subir-pdf" type="submit" [disabled]="isLoading || !selectedFile">
+            Subir PDF
+          </button>
+        </div>
+      </form>
+
+      <div *ngIf="isLoading">
+        <p>Cargando archivo... Por favor, espera.</p>
       </div>
 
-      <div *ngIf="selectedFile" class="file-preview">
-        <img src="assets/img/pdf.svg" alt="PDF Icon" class="file-icon" />
-        <p>{{ selectedFile.name }}</p>
-        <img src="assets/img/borrar.svg" alt="Trash" class="file-icon" (click)="clearFile()" />
+      <div *ngIf="errorMessage" class="error">
+        <p>{{ errorMessage }}</p>
       </div>
-      <div class="boton">
-        <button class="subir-pdf" type="submit" [disabled]="isLoading || !selectedFile">
-          Subir PDF
-        </button>
-      </div>
-    </form>
-
-    <div *ngIf="isLoading">
-      <p>Cargando archivo... Por favor, espera.</p>
-    </div>
-
-    <div *ngIf="errorMessage" class="error">
-      <p>{{ errorMessage }}</p>
     </div>
   </div>
-
 </div>
 </body>
 

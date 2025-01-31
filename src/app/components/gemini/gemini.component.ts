@@ -41,7 +41,7 @@ export class GeminiComponent implements OnInit {
 
   guardarEvaluacionEnHistorial(): void {
     const evaluacion = {
-      fecha: new Date().toISOString(),  // Guarda la fecha actual
+      fecha: new Date().toLocaleDateString('es-ES'),  // Formato "DD/MM/AAAA"
       cargo: this.selectedCargo,
       postulantes: this.postulantesFiltrados.map(postulante => ({
         nombre_completo: postulante.nombre_completo,
@@ -72,16 +72,37 @@ export class GeminiComponent implements OnInit {
       "formato_json": true,
       "evaluarPostulantes": true,
       "instrucciones": `
-      Evalúa los postulantes según los siguientes criterios:
-      - Nivel académico: compararlo con el nivel requerido del cargo.
-      - Cursos: comparar los cursos con los conocimientos requeridos.
-      Devuelve un puntaje sobre 100 y razones específicas para cada postulante en formato JSON:
+  Evalúa a los postulantes para el cargo en la institución financiera, comparando sus perfiles con los requisitos del puesto (cargoData).
+
+  La evaluación se basará en los campos de cargoData, que incluyen:
+    - Nivel académico comparalo con el area de conocimiento del cargo y calificalo sobre 20 puntos
+    - Cursos compara si el contenido del mismo esta alineado con conocimiento técnico y calificalo sobre 25 puntos
+    - Experiencia comparalo con los cargos que ha tenido, el actual, ultimo y penultimo, en especial si entre los tiempos
+      que ha estado laborando, cumple con los años que piden de experiencia y calificalo sobre 40 puntos
+    - Habilidades/Destrezas/Competencias puedes compararlo con contribuciones laborales y calificarlo sobre 15 puntos
+
+  Para cada postulante, asigna un puntaje sobre 100, justificando la calificación con aspectos positivos y negativos encontrados en su perfil.
+
+  Devuelve los resultados en formato JSON:
+  {
+    'postulantesOrdenados': [
       {
-        'postulantesOrdenados': [
-          { 'NOMBRES_Y_APELLIDOS': string, 'puntaje': number, 'razones': string[] }
-        ]
-      }.
-    `,
+        'NOMBRES_Y_APELLIDOS': string,
+        'puntaje': number,
+        'razones': {
+          'aspectosPositivos': string[],
+          'aspectosNegativos': string[]
+        }
+      }
+    ]
+  }
+
+  Consideraciones adicionales:
+    - Prioriza la precisión en la comparación de perfiles y la justificación de los puntajes.
+    - Sé específico al mencionar los aspectos positivos y negativos de cada postulante.
+    - Si un postulante no cumple con un requisito esencial, su puntaje debe reflejarlo.
+    - Si dos postulantes tienen puntajes similares, asegúrate de que las razones destaquen sus diferencias clave.
+` ,
       postulantesData: this.postulantesFiltrados,
       cargoData: cargoSeleccionado
     });
@@ -89,12 +110,12 @@ export class GeminiComponent implements OnInit {
     this.geminiService.sendPrompt(context).subscribe(
       (response: string) => {
         try {
-          const cleanedResponse = response.replace(/```json|```/g, '').trim();
+          const cleanedResponse = response.replace(/`json|`/g, '').trim();
           const ordenados = JSON.parse(cleanedResponse).postulantesOrdenados || [];
 
           this.postulantesFiltrados = this.postulantesFiltrados.map(postulante => {
             const ordenado = ordenados.find((p: { NOMBRES_Y_APELLIDOS: string }) => p.NOMBRES_Y_APELLIDOS === postulante.nombre_completo);
-            return ordenado ? { ...postulante, puntaje: ordenado.puntaje, razones: ordenado.razones } : postulante;
+            return ordenado ? { ...postulante, ...ordenado } : postulante; // Fusiona los datos del postulante con los de Gemini
           });
 
           this.postulantesFiltrados.sort((a, b) => b.puntaje - a.puntaje);

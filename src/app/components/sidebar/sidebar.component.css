@@ -1,6 +1,6 @@
 .sidebar {
-  background-color: #ffffff;
-  height: 86vh;
+  background-color: #f5f6f7;
+  height: 100vh;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -8,6 +8,10 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.logo{
+  height: 40px;
+  margin-bottom: 20px;
+}
 .menu {
   list-style: none;
   padding: 0;

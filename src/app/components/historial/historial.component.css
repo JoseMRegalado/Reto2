@@ -4,6 +4,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.contenedor{
+  width: 100%;
+}
+
 .historial-container {
   padding: 20px;
   background-color: #ffffff;
@@ -52,3 +56,79 @@ body {
   color: #888;
   text-align: center;
 }
+
+.filter-group{
+  display: flex;
+
+}
+
+.filter-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  color: #4caf50;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.filter-btn.active {
+  background-color: #f0f0f0;
+  color: #8bbe2e;
+  width: 120px;
+}
+
+.contenedor-evaluacion{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+}
+
+.contenedor-general{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  width: 90%;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+}
+
+.modal-content .text {
+  text-align: left;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+

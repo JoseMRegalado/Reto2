@@ -4,6 +4,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.contenedor{
+  width: 100%;
+}
+
 .main-container {
   width: 100%;
   padding: 20px;
