@@ -38,7 +38,7 @@ body {
 
 .filter-btn.active {
   background-color: #f0f0f0;
-  color: #8bbe2e;
+  color: #335677;
   width: 120px;
 }
 
@@ -119,7 +119,7 @@ body {
 }
 
 .btn-see-more {
-  background-color: #8bbe2e;
+  background-color: #335677;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -129,12 +129,12 @@ body {
 }
 
 .btn-see-more:hover {
-  background-color: #5fa863;
+  background-color: #f1f1ff;
 
 }
 
 .button-compare{
-  background-color: #8bbe2e;
+  background-color: #335677;
   border-radius: 10px;
   color: white;
   padding: 10px;
@@ -142,7 +142,7 @@ body {
 }
 
 .button-compare:hover {
-  background-color: #5fa863;
+  background-color: #f1f1ff;
 }
 
 .top-postulante {
@@ -187,7 +187,7 @@ body {
   padding: 5px;
   font-size: 14px;
   font-weight: bold;
-  color: #8bbe2e;
+  color: #335677;
 }
 
 .campo-normal{

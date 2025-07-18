@@ -43,7 +43,7 @@ body {
 
 .btn-detalles {
   padding: 5px 10px;
-  background-color: #8bbe2e;
+  background-color: #335677;
   color: white;
   border: none;
   border-radius: 5px;
@@ -52,7 +52,7 @@ body {
 }
 
 .btn-detalles:hover {
-  background-color: #5fa863;
+  background-color: #33567733;
 }
 
 .no-data {
@@ -73,7 +73,7 @@ body {
   border: none;
   border-radius: 10px;
   background-color: #f3f3f3;
-  color: #4caf50;
+  color: #335677;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
@@ -81,7 +81,7 @@ body {
 }
 .filter-btn.active {
   background-color: #f0f0f0;
-  color: #8bbe2e;
+  color: #335677;
   width: 120px;
 }
 
@@ -125,7 +125,7 @@ body {
 }
 
 .button-compare{
-  background-color: #8bbe2e;
+  background-color: #335677;
   border-radius: 10px;
   color: white;
   padding: 10px;
@@ -136,7 +136,7 @@ body {
 }
 
 .button-compare:hover {
-  background-color: #5fa863;
+  background-color: #33567733;
 }
 
 .modal-button{
@@ -149,7 +149,7 @@ body {
   padding: 5px;
   font-size: 14px;
   font-weight: bold;
-  color: #8bbe2e;
+  color: #335677;
 }
 
 .campos{
@@ -188,7 +188,7 @@ body {
 
 
 .btn-see-more {
-  background-color: #8bbe2e;
+  background-color: #335677;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -198,7 +198,7 @@ body {
 }
 
 .btn-see-more:hover {
-  background-color: #5fa863;
+  background-color: #33567733;
 
 }
 

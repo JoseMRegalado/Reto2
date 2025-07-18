@@ -91,7 +91,7 @@ export class GeminiComponent implements OnInit {
   La evaluación se basará en los campos de cargoData, que incluyen:
     - Nivel académico comparalo con el area de conocimiento del cargo y calificalo sobre 20 puntos
     - Cursos compara si el contenido del mismo esta alineado con conocimiento técnico y calificalo sobre 25 puntos
-    - Experiencia comparalo con los cargos que ha tenido, el actual, ultimo y penultimo, en especial si entre los tiempos
+    - Experiencia comparalo con los cargos que ha tenido, el actucasuísticasal, ultimo y penultimo, en especial si entre los tiempos
       que ha estado laborando, cumple con los años que piden de experiencia y calificalo sobre 40 puntos
     - Habilidades/Destrezas/Competencias puedes compararlo con contribuciones laborales y calificarlo sobre 15 puntos
 

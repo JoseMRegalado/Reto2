@@ -1,7 +1,7 @@
 header{
   background: #ffffff;
   width: 100%;
-  border-bottom: 1px solid #8bbe2e;
+  border-bottom: 1px solid #335677;
 
 }
 
@@ -25,13 +25,13 @@ header .logo img{
 }
 
 .logo h5{
-  color: #8bbe2e;
+  color: #335677;
   font-size: 14px;
 }
 
 .contenedor h4{
   font-size: 20px;
-  color: #8bbe2e;
+  color: #335677;
   justify-content: left;
   padding: 10px;
 }

@@ -40,7 +40,7 @@ body {
 }
 
 .upload-area:hover {
-  border-color: #8bbe2e;
+  border-color: #335677;
 }
 
 .file-preview {
@@ -70,7 +70,7 @@ body {
 }
 
 .subir-pdf{
-  background-color: #8bbe2e;
+  background-color: #335677;
   border-radius: 10px;
   color: white;
   padding: 10px;
@@ -79,7 +79,7 @@ body {
 }
 
 .container h3{
-  color: #8bbe2e;
+  color: #335677;
   font-size: 20px;
   font-weight: bold;
 }

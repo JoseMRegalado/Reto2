@@ -41,12 +41,12 @@ body {
 }
 
 .upload-area:hover {
-  border-color: #8bbe2e;
+  border-color: #335677;
 }
 
 .file-label {
   margin-top: 10px;
-  color: #8bbe2e;
+  color: #335677;
   cursor: pointer;
   font-weight: bold;
   text-decoration: underline;
@@ -73,7 +73,7 @@ body {
 }
 
 .btn-confirm {
-  background-color: #8bbe2e;
+  background-color: #335677;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -84,7 +84,7 @@ body {
 }
 
 .btn-confirm:hover {
-  background-color: #76a825;
+  background-color: #335677;
 }
 
 .btn-confirm:disabled {
@@ -102,7 +102,7 @@ body {
   border: none;
   border-radius: 10px;
   background-color: #f3f3f3;
-  color: #4caf50;
+  color: #335677;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
@@ -110,7 +110,7 @@ body {
 }
 .filter-btn.active {
   background-color: #f0f0f0;
-  color: #8bbe2e;
+  color: #335677;
   width: 120px;
 }
 
@@ -129,7 +129,7 @@ body {
 }
 
 .subir-pdf{
-  background-color: #8bbe2e;
+  background-color: #335677;
   border-radius: 10px;
   color: white;
   padding: 10px;
